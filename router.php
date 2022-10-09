@@ -1,5 +1,6 @@
 <?php
-require_once 'app\controller\product.controller.php';
+require_once 'app/controller/product.controller.php';
+
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -33,28 +34,46 @@ switch ($params[0]) {
     case 'producto':
         $productController->showProduct($params[1]);   //producto/*id_producto*                      => [producto/*id_producto*]
         break;
-    
-    case 'delete-product':
-        $productController->deleteProduct($params[1]);  //delete-product/*id_producto*
-        break;
+
+// ABM Product
     case 'add-product':
-        $productController->addProduct();  //add-product/id-cat-fk/nombre/precio/descripcion
+        $productController->addProduct(); 
         break;
-    case 'form-add-product':
-        $productController->formAddProduct();  //add-product/id-cat-fk/nombre/precio/descripcion
-        break;    
-    case 'form-modify-product':
-        $productController->formModifyProduct($params[1]);  //form-modify-product/*id_producto*
+    case 'delete-product':
+        $productController->deleteProduct($params[1]); 
         break;
     case 'modify-product':
-        $productController->modifyProduct();  //form-modify-product/26
-        break;      
-    case 'test':
-        $productController->test(); 
-        break;          
-    default:
-        showHome();
+        $productController->modifyProduct();  
+        break; 
+    case 'form-add-product':
+        $productController->formAddProduct();  
+        break;    
+    case 'form-modify-product':
+        $productController->formModifyProduct($params[1]); 
         break;
+
+// ABM Category  
+
+    case 'add-category':
+        $productController->addCategory();  
+        break;
+    case 'delete-category':
+        $productController->deleteCategory($params[1]);  
+        break;
+    case 'modify-category':
+        $productController->modifyCategory(); 
+        break; 
+    case 'form-add-category':
+        $productController->formAddCategory();  
+        break;    
+    case 'form-modify-category':
+        $productController->formModifyCategory($params[1]);  
+        break;
+
+
+default:
+showHome();
+break;
 }
 
 

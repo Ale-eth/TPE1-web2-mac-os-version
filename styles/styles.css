@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+
+body{
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment:fixed;
+}
+
+.title-text{
+    opacity: 88%;
+    font-size:65px;
+    margin-top:10px;
+    font-family: 'Staatliches', cursive;
+}
+
+.sub-title-text{
+    font-family: 'Staatliches', cursive;
+    font-size:38px;
+}
+
+.normal-text{
+    margin-left:40px;
+    font-family: 'Staatliches', cursive;
+    font-size:20px;
+}
+
+.form-div{
+    margin :30px;
+    border-radius:50px;
+    padding:30px;
+    background: #FFEFBA;
+    background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA); 
+    background: linear-gradient(to right, #FFFFFF, #FFEFBA); 
+}
+
+.header{
+    display:flex;
+    justify-content:center;
+}
+
+.footer{
+    display:flex;
+    justify-content:center;
+}

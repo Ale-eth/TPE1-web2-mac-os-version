@@ -1,6 +1,6 @@
 <?php
-require_once 'app\model\product.model.php';
-require_once 'app\view\product.view.php';
+require_once 'app/model/product.model.php';
+require_once 'app/view/product.view.php';
 
 class ProductController{
 
@@ -14,7 +14,7 @@ class ProductController{
 
     public function showHome(){
         $this->view->showHome();
-        }
+    }
 
     public function showAllProducts(){
         $products = $this->model->getAllProducts();
@@ -37,9 +37,11 @@ class ProductController{
     }
 
 
-    // ABM
+    // ABM product
+
     public function formAddProduct(){
-        $this->view->AddProduct();
+        $categories = $this->model->getCategories();
+        $this->view->addProduct($categories);
     }
 
     public function addProduct(){
@@ -82,10 +84,48 @@ class ProductController{
 
 
 
+    // ABM category
 
+    public function formAddCategory(){
+        $this->view->AddCategory();
+    }
 
-    public function test(){
+    public function addCategory(){
+
+        $nombre = $_POST['nombre'];
+        $descripcion = $_POST['descripcion'];
+
+        $id_category = $this->model->addCategory($nombre, $descripcion);
+
+        header("Location: " . BASE_URL); 
+
+    }
+
+    public function deleteCategory($id_category){
+        $this->model->deleteCategory($id_category);
+        header("Location: " . BASE_URL);
+
+    }
+
+    public function formModifyCategory($id_category){
+        $this->view->modifyCategory($id_category);
         
     }
+
+    public function modifyCategory(){
+
+        $nombre = $_POST['nombre'];
+        $descripcion = $_POST['descripcion'];
+        $id = $_POST['id'];
+
+        $this->model->modifyCategory($id, $nombre, $descripcion);
+
+        header("Location: " . BASE_URL);
+    }
+
+
+
+
+
 
 }

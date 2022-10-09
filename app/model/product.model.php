@@ -4,7 +4,7 @@ class ProductModel{
     private $db;
 
     public function __construct(){
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=web2_tiendaropa;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=web2_tiendaderopa;charset=utf8', 'root', 'admin2022');
     }
 
     public function getAllProducts(){
@@ -68,6 +68,8 @@ class ProductModel{
         return $array_products;
     }
 
+    // AMB product
+
     public function addProduct($nombre, $precio, $id_categoriafk, $descripcion){
 
         $query = $this->db->prepare("INSERT INTO producto (nombre, precio, id_categoriaFK, descripcion) VALUES (?, ?, ?, ?)");
@@ -86,6 +88,28 @@ class ProductModel{
     public function modifyProduct($id_producto, $nombre, $precio, $categoria, $descripcion){
         $query = $this->db->prepare("UPDATE `producto` SET `id_categoriaFK` = ?, `nombre` = ?, `precio` = ?, `descripcion` = ? WHERE `producto`.`id_producto` = ?");
         $query->execute([$categoria, $nombre, $precio, $descripcion, $id_producto]);
+    }
+
+
+    // AMB category
+
+    public function addCategory($nombre, $descripcion){
+
+        $query = $this->db->prepare("INSERT INTO categoria (nombre, descripcion) VALUES (?, ?)");
+        $query->execute([$nombre, $descripcion]);
+
+        return $this->db->lastInsertId();
+    }
+
+    public function deleteCategory($id_category){
+
+        $query = $this->db->prepare('DELETE FROM categoria WHERE id_categoria = ?');
+        $query->execute([$id_category]);
+    }
+
+    public function modifyCategory($id_category, $nombre, $descripcion){
+        $query = $this->db->prepare("UPDATE `categoria` SET `nombre` = ?, `descripcion` = ? WHERE `categoria`.`id_categoria` = ?");
+        $query->execute([$nombre, $descripcion, $id_category]);
     }
 
 }
