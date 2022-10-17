@@ -4,7 +4,10 @@ class ProductModel{
     private $db;
 
     public function __construct(){
+        // Mac OS
         $this->db = new PDO('mysql:host=localhost;'.'dbname=web2_tiendaderopa;charset=utf8', 'root', 'admin2022');
+        // Windows
+        
     }
 
     public function getAllProducts(){

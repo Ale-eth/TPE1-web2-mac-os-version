@@ -1,5 +1,10 @@
 <?php
+
+// Mac OS
 require_once 'libs/Smarty.class.php';
+
+// Windows OS
+
 
 class ProductView{
     private $smarty;

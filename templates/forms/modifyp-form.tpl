@@ -1,5 +1,6 @@
 {include file="header.tpl"}
 
+<div class="content">
 <h2>Modificar producto</h2>
 <form action="modify-product" method="POST">
     <input name="id" style="display:none;" type="text" value="{$id}">
@@ -19,3 +20,4 @@
     
     <button type="submit">Modificar</button>
 </form>
+</div>

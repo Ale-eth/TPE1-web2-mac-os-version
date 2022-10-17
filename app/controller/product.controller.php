@@ -1,6 +1,10 @@
 <?php
+
+// Mac OS
 require_once 'app/model/product.model.php';
 require_once 'app/view/product.view.php';
+
+// Windows OS
 
 class ProductController{
 
@@ -8,6 +12,7 @@ class ProductController{
     private $view;
 
     public function __construct(){
+        session_start();
         $this->model = new ProductModel();
         $this->view = new ProductView();
     }
@@ -80,8 +85,6 @@ class ProductController{
 
         header("Location: " . BASE_URL);
     }
-
-
 
 
     // ABM category

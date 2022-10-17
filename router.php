@@ -1,5 +1,6 @@
 <?php
 require_once 'app/controller/product.controller.php';
+require_once 'app/controller/auth.controller.php';
 
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -15,6 +16,7 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action); // genera un arreglo = array(1) { [0]=> string(4) "home" } 
 
 $productController = new ProductController();
+$authController = new AuthController();
 
 
 switch ($params[0]) {
@@ -70,10 +72,26 @@ switch ($params[0]) {
         $productController->formModifyCategory($params[1]);  
         break;
 
+// Login Logout
+
+    case 'login':
+        $authController->formLogin();  
+        break;
+    case 'validate':
+        $authController->validateLogin();  
+        break;
+    case 'logout':
+        $authController->logout();  
+        break;
+
+
+// Password hasher, solo para TEST
+    case 'hasher':
+        $authController->hashpw();
+        break;
+
 
 default:
 showHome();
 break;
 }
-
-

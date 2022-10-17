@@ -1,21 +1,25 @@
 {include file="header.tpl"}
 
-<h3 class="sub-title-text"> Categorias: </h3>
+<div class="content">
+    <h3 class="sub-title-text"> Categorias: </h3>
+    <ul class="list-group">
+        {foreach from=$categories item=$category}
+            <li class="normal-text" class="list-group-item">
+                <a href="categorias/{$category->id_categoria}">{$category->nombre}</a> 
 
-<ul class="list-group">
-    {foreach from=$categories item=$category}
-        <li class="list-group-item">
-        <a href="categorias/{$category->id_categoria}">{$category->nombre}</a> 
-        <a class="btn btn-danger btn-sm" href="delete-category/{$category->id_categoria}"><i class="fa-solid fa-trash"></i></a>
-        <a class="btn btn-warning btn-sm" href="form-modify-category/{$category->id_categoria}"><i class="fa-solid fa-pen-to-square"></i></a>
-        </li>  
-    {/foreach}
+                {if isset($smarty.session.IS_LOGGED)}
+                    <a class="btn btn-danger btn-sm" href="delete-category/{$category->id_categoria}"><i class="fa-solid fa-trash"></i></a>
+                    <a class="btn btn-warning btn-sm" href="form-modify-category/{$category->id_categoria}"><i class="fa-solid fa-pen-to-square"></i></a>
+                {/if}
+            </li>  
+        {/foreach}
+    </ul>
 
-    <li class="list-group-item">
-    <a class="btn btn-success" href="form-add-category"> <i class="fa-solid fa-plus"></i></a>
-     
-    </li>  
-</ul>
+    {if isset($smarty.session.IS_LOGGED)}
+        <a class="btn btn-success" href="form-add-category"> <i class="fa-solid fa-plus"></i></a>
+    {/if}
+
+</div>
 
 
 

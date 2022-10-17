@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 
-<div class="form">
+<div class="content">
 <h2>Modificar categoria</h2>
 <form action="modify-category" method="POST">
     <input name="id" style="display:none;" type="text" value="{$id}">
