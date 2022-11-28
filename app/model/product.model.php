@@ -23,16 +23,16 @@ class ProductModel{
 
     public function getProduct($id_product){
 
-        $query = $this->db->prepare("SELECT * FROM producto WHERE id_producto = $id_product");
-        $query->execute();
+        $query = $this->db->prepare("SELECT * FROM producto WHERE id_producto = ?");
+        $query->execute([$id_product]);
 
         $product = $query->fetchAll(PDO::FETCH_OBJ);
 
 
         $idcatprod = $product[0]->id_categoriaFK; // Guardo en una variable la id fk para invocarla en otra llamada, pq sino hay error de tipeo
 
-        $query = $this->db->prepare("SELECT * FROM categoria WHERE id_categoria = $idcatprod");
-        $query->execute();
+        $query = $this->db->prepare("SELECT * FROM categoria WHERE id_categoria = ?");
+        $query->execute([$idcatprod]);
         $category = $query->fetchAll(PDO::FETCH_OBJ);
 
         $array_product = new ArrayObject(array($product, $category));
@@ -40,8 +40,10 @@ class ProductModel{
         return $array_product;
     }
 
-    public function getCategories(){
 
+    // ABM product
+
+    public function formAddProduct(){
         $query = $this->db->prepare("SELECT * FROM categoria");
         $query->execute();
 
@@ -50,28 +52,6 @@ class ProductModel{
 
         return $categories;
     }
-
-    public function getCategory($id_category){
-
-        $query = $this->db->prepare("SELECT * FROM producto WHERE id_categoriaFK = $id_category");
-        $query->execute();
-
-        $products = $query->fetchAll(PDO::FETCH_OBJ);
-
-        $idcatprod = $products[0]->id_categoriaFK;
-
-        $query = $this->db->prepare("SELECT * FROM categoria WHERE id_categoria = $id_category");
-        $query->execute();
-
-        $category = $query->fetchAll(PDO::FETCH_OBJ);
-
-        
-        $array_products = new ArrayObject(array($products, $category));
-        
-        return $array_products;
-    }
-
-    // AMB product
 
     public function addProduct($nombre, $precio, $id_categoriafk, $descripcion){
 
@@ -91,28 +71,6 @@ class ProductModel{
     public function modifyProduct($id_producto, $nombre, $precio, $categoria, $descripcion){
         $query = $this->db->prepare("UPDATE `producto` SET `id_categoriaFK` = ?, `nombre` = ?, `precio` = ?, `descripcion` = ? WHERE `producto`.`id_producto` = ?");
         $query->execute([$categoria, $nombre, $precio, $descripcion, $id_producto]);
-    }
-
-
-    // AMB category
-
-    public function addCategory($nombre, $descripcion){
-
-        $query = $this->db->prepare("INSERT INTO categoria (nombre, descripcion) VALUES (?, ?)");
-        $query->execute([$nombre, $descripcion]);
-
-        return $this->db->lastInsertId();
-    }
-
-    public function deleteCategory($id_category){
-
-        $query = $this->db->prepare('DELETE FROM categoria WHERE id_categoria = ?');
-        $query->execute([$id_category]);
-    }
-
-    public function modifyCategory($id_category, $nombre, $descripcion){
-        $query = $this->db->prepare("UPDATE `categoria` SET `nombre` = ?, `descripcion` = ? WHERE `categoria`.`id_categoria` = ?");
-        $query->execute([$nombre, $descripcion, $id_category]);
     }
 
 }

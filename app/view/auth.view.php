@@ -17,7 +17,4 @@ class AuthView {
         $this->smarty->display('templates\forms\login-form.tpl');
     }
 
-    function test(){
-        $this->smarty->display('templates\test.tpl');
-    }
 }

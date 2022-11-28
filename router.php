@@ -1,6 +1,8 @@
 <?php
 require_once 'app/controller/product.controller.php';
+require_once 'app/controller/category.controller.php';
 require_once 'app/controller/auth.controller.php';
+
 
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -15,7 +17,11 @@ if (!empty($_GET['action'])) {
 // parsea la accion Ej: about/juan --> ['about', 'juan']
 $params = explode('/', $action); // genera un arreglo = array(1) { [0]=> string(4) "home" } 
 
+session_start();
+
+
 $productController = new ProductController();
+$categoryController = new CategoryController();
 $authController = new AuthController();
 
 
@@ -28,9 +34,9 @@ switch ($params[0]) {
         break;
     case 'categorias':
         if(!empty($params[1])){
-            $productController->showCategory($params[1]);
+            $categoryController->showCategory($params[1]);
         }else{
-            $productController->showCategories();   //categorias                                           => [categorias]
+            $categoryController->showCategories();   //categorias                                           => [categorias]
         }
         break;
     case 'producto':
@@ -45,10 +51,9 @@ switch ($params[0]) {
         $productController->deleteProduct($params[1]); 
         break;
     case 'modify-product':
-        $productController->modifyProduct();  
-        break; 
+        $productController->modifyProduct(); 
     case 'form-add-product':
-        $productController->formAddProduct();  
+        $productController->formAddProduct(); 
         break;    
     case 'form-modify-product':
         $productController->formModifyProduct($params[1]); 
@@ -57,19 +62,19 @@ switch ($params[0]) {
 // ABM Category  
 
     case 'add-category':
-        $productController->addCategory();  
+        $categoryController->addCategory();  
         break;
     case 'delete-category':
-        $productController->deleteCategory($params[1]);  
+        $categoryController->deleteCategory($params[1]);
         break;
     case 'modify-category':
-        $productController->modifyCategory(); 
+        $categoryController->modifyCategory(); 
         break; 
     case 'form-add-category':
-        $productController->formAddCategory();  
+        $categoryController->formAddCategory();
         break;    
     case 'form-modify-category':
-        $productController->formModifyCategory($params[1]);  
+        $categoryController->formModifyCategory($params[1]); 
         break;
 
 // Login Logout

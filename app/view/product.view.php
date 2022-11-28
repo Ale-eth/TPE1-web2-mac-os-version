@@ -51,15 +51,4 @@ class ProductView{
         $this->smarty->display('templates\forms\modifyp-form.tpl');
     }
 
-    // ABM category
-
-    public function addCategory(){
-        $this->smarty->display('templates\forms\addc-form.tpl');
-     }
-
-     public function modifyCategory($id_category){
-        $this->smarty->assign('id', $id_category);
-        $this->smarty->display('templates\forms\modifyc-form.tpl');
-    }
-
 }
